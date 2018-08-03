@@ -14,7 +14,7 @@ A customer interface allowing a user to shop through a database of products. The
 - Node.js
 
 ## For Help
-Please visit [My website] (https://fdunigan.github.io/) and enter your contact information for assistance. 
+Please visit [My website](https://fdunigan.github.io/) and enter your contact information for assistance. 
 
 
 
