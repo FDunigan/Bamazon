@@ -3,9 +3,9 @@ A customer interface allowing a user to shop through a database of products. The
 
 ## Begin Shopping
 `node bamazonCustomer.js`
-`select a numeric product ID`
-`select a quantity to purchase`
-`enter yes or no to continue shopping`
+- select a numeric product ID
+- select a quantity to purchase
+- enter yes or no to continue shopping
 
 ## Technologies Used 
 - JavaScript
