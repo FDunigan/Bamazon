@@ -5,13 +5,16 @@ A customer interface allowing a user to shop through a database of products. The
 `node bamazonCustomer.js`
 - select a numeric product ID
 - select a quantity to purchase
-- enter yes or no to continue shopping
+- enter "yes" or "no" to continue shopping
 
 ## Technologies Used 
 - JavaScript
 - MySQL
 - NPM Inquirer
 - Node.js
+
+## For Help:
+Please visit fdunigan.github.io and enter your contact information for assistance. 
 
 
 
