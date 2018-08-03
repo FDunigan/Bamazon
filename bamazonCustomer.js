@@ -40,25 +40,39 @@ function idSearch() {
                 }
             }
         ]).then(function(res) {
-            var item2 = res.product;
-            var quantity2 = res.quantity;
+          var item = res.product;
+          var amount = res.quantity;
 
-            connection.query("SELECT * FROM products WHERE ?", { product_name: item2 }, 
+          connection.query('SELECT * FROM products WHERE ?', { item_id: item }, 
             function(err, response) {
                 if (err) throw err;
 
-                if (response.length === 0) {
-                    console.log('Error: Please select a valid ID.');
+                if (response.length == 0) {
+                    console.log("Error: Please enter a valid ID");
                     displayInfo();
                 } else {
                     var productRes = response[0];
-                    if (quantity2 <= productRes.stock_quantity) {
-                        console.log('Your product is in stock!');
+                    if (amount <= productRes.stock_quantity) {
+                        console.log("Great choice! Your item is in stock");
+
+                        var updateInventory = 'UPDATE products SET stock_quantity = ' +
+                        (productRes.stock_quantity - amount) + ' WHERE item_id = ' + item;
+
+                        connection.query(updateInventory, function(err, data) {
+                            if (err) throw err;
+
+                            console.log('Your order has been placed! Your total is $' + productRes.price * amount);
+                            console.log("Thank you for shopping with us!");
+                            keepShopping();
+                        })
+                    } else {
+                        console.log('Sorry, that item is not in stock');
+                        console.log('You chose ' + productRes.product_name + ' and it has only ' +
+                        productRes.stock_quantity + ' left in stock.');
+                        console.log('\n---------------');
+                        keepShopping();
                     }
-                } {
-                    console.log('Sorry, that item is out of stock.');
                 }
-            
             })
         })
 };
@@ -67,10 +81,29 @@ function displayInfo() {
     connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw err;
         for (var i = 0; i < res.length; i++) {
-            console.log("ID: " + res[i].id + " | Product Name: " + res[i].product_name + " | Price: " + res[i].price +
+            console.log("ID: " + res[i].item_id + " | Product Name: " + res[i].product_name + " | Price: " + res[i].price +
                 " | Quantity Remaining: " + res[i].stock_quantity);
         }
+        console.log('\n-------------------');
         idSearch();
     });
 }
 
+function keepShopping() {
+    inquirer
+    .prompt([
+        {
+            name: 'confirm',
+            type: 'confirm',
+            message: 'Would you like to keep shopping?'
+        }    
+    ]).then(function(res) {
+        if (res.confirm) {
+            console.log('\n-----------------');
+            displayInfo();
+        } else {
+            console.log('Thank you for shopping with us!');
+            connection.end();
+        }
+    })
+}
