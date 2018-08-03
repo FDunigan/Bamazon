@@ -62,7 +62,6 @@ function idSearch() {
                             if (err) throw err;
 
                             console.log('Your order has been placed! Your total is $' + productRes.price * amount);
-                            console.log("Thank you for shopping with us!");
                             keepShopping();
                         })
                     } else {
