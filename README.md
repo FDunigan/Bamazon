@@ -13,8 +13,8 @@ A customer interface allowing a user to shop through a database of products. The
 - NPM Inquirer
 - Node.js
 
-## For Help:
-Please visit fdunigan.github.io and enter your contact information for assistance. 
+## For Help
+Please visit [My website] (https://fdunigan.github.io/) and enter your contact information for assistance. 
 
 
 
